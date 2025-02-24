@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 import { User, LoginCredentials, AuthResponse, AuthContextType } from "../types/auth.types";
 
 // Skapa context 
@@ -44,10 +44,39 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => { // 
 
             // Fånga upp fel 
         } catch (error) {
-            console.error("Fel i catch");
+            console.error("Fel i catch: ", error);
             throw new Error("Fel i catch");
         }
     }
+
+    // Metod för att kontrollera om användaren är inloggad och slippa logga in på nytt vid sidomladdning
+    const checkToken = async () => {
+        try {
+            const res = await fetch("http://localhost:5000/checkUser", {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (!res.ok) throw new Error("Hittade ingen session"); // Vid ev fel 
+
+            const data = await res.json();
+            setUser(data.user);
+
+            // Fånga fel 
+        } catch (error) {
+            console.error("Något gick fel vid kontroll av session");
+            setUser(null);
+        }
+    }
+
+    // Anropa checkToken
+    useEffect(() => {
+        checkToken();
+    }, [])
 
     // Metod för att logga ut 
     const logout = async () => {
