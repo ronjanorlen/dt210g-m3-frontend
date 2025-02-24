@@ -1,21 +1,21 @@
-import { createContext, useState, useContext, ReactNode } from "react"; 
-import {User, LoginCredentials, AuthResponse, AuthContextType} from "../types/auth.types";
+import { createContext, useState, useContext, ReactNode } from "react";
+import { User, LoginCredentials, AuthResponse, AuthContextType } from "../types/auth.types";
 
 // Skapa context 
-const AuthContext = createContext <AuthContextType | null>(null);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 // Vad ska skickas ut till komponent som använder provider
 interface AuthProviderProps {
-    children: ReactNode 
+    children: ReactNode
 }
 
 // Provider 
-export const AuthProvider: React.FC<AuthProviderProps> = ( {children }) => { // Returnera en reactfunktions-komponent, ta emot children (reactNodes)
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => { // Returnera en reactfunktions-komponent, ta emot children (reactNodes)
 
     const [user, setUser] = useState<User | null>(null);
 
     // Metod för att logga in 
-    const login = async (credentials: LoginCredentials) => {
+    const login = async (credentials: LoginCredentials): Promise<void> => {
 
         try {
             const res = await fetch("http://localhost:5000/login", {
@@ -23,43 +23,64 @@ export const AuthProvider: React.FC<AuthProviderProps> = ( {children }) => { // 
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(credentials)
+                body: JSON.stringify(credentials),
+                credentials: "include" // Skicka med cookie
             })
 
             // Om inte ok
-            if(!res.ok) throw new Error("Misslyckad inloggning");
+            if (!res.ok) throw new Error("Misslyckad inloggning");
 
             // Om ok 
             const data = await res.json() as AuthResponse;
+            console.log("Data från inloggning: ", data);
 
-            localStorage.setItem("token", data.token);
-            setUser(data.user);
+            // Statea användare 
+            if (data.user) {
+                setUser(data.user);
+            } else {
+                console.error("Misslyckad inloggning: ingen data från inloggning");
+                throw new Error("Inloggning misslyckades");
+            }
 
-        // Fånga upp fel 
-        } catch(error) {
-            throw error;
+            // Fånga upp fel 
+        } catch (error) {
+            console.error("Fel i catch");
+            throw new Error("Fel i catch");
         }
     }
 
     // Metod för att logga ut 
-    const logout = () => {
-        localStorage.removeItem("token"); // Ta bort token 
+    const logout = async () => {
+        try {
+            const res = await fetch("http://localhost:5000/logout", {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+            if (!res.ok) throw new Error("Misslyckad utloggning");
 
-        setUser(null); // Nollställ användare 
+            setUser(null);
+            // Fånga fel 
+        } catch (error) {
+            console.error("Fel vid utloggning: ", error);
+        }
     }
 
     return (
-        <AuthContext.Provider value={{user, login, logout}}>
+        <AuthContext.Provider value={{ user, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
 
 }
 
-export const useAuth = () : AuthContextType => {
+// Hook för användning av authContext 
+export const useAuth = (): AuthContextType => {
     const context = useContext(AuthContext);
 
-    if(!context) {
+    if (!context) {
         throw new Error("useAuth måste användas inom en AuthProvider");
     }
 
