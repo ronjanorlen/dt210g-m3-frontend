@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage"; // Importera logga in-sida
 import ProductPage from "./pages/ProductPage"; // Importera produktsida 
 import Layout from "./components/Layout"; // Importera Layout-fil 
 import ProtectedRoute from "./components/ProtectedRoute"; // importera skyddad route 
+import ProductInfo from "./pages/ProductInfo";
 
 // Routing med Layout som standardfil
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
                 path: "/login",
                 element: <LoginPage />
             },
+             {
+                path: "/products/:id",
+                element: <ProductInfo />
+             },
             {
                 path: "/products",
                 element: (

@@ -1,8 +1,10 @@
 import { useAuth } from "../context/AuthContext"
+import { useEffect, useState } from "react";
+import { ProductInterface } from "../types/ProductInterface";
 
 const ProductPage = () => {
 
-  const {user} = useAuth();
+ const {user} = useAuth();
   return (
     <div>
         <h1>Produktsida</h1>
