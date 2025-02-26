@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { ProductInterface } from "../types/ProductInterface"
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
 
@@ -9,6 +10,9 @@ const HomePage = () => {
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
     const [filteredProducts, setFilteredProducts] = useState<ProductInterface[]>([]);
+
+    // Gå till specifik produkt
+    const navigate = useNavigate();
 
     // useEffect för hämtning av produkter 
     useEffect(() => {
@@ -68,14 +72,15 @@ const HomePage = () => {
             {/* Felmeddelande */}
             {error && <p className="error-msg">{error}</p>}
 
+            {/* Container för varje produkt */}
             <div className="product-container">
                 {
                     filteredProducts.map((product) => (
                         <section className="product" key={product._id}>
-                            <h3>{product.factory}</h3>
-                            <h4>{product.model}</h4>
-                            <p>{product.price}</p>
-                            <p>{product.skilength}</p>
+                            <h3>Modell: {product.model}</h3>
+                            <p>Längd: {product.skilength}</p>
+                            <p>Pris: {product.price}</p>
+                            <button className="moreInfo-btn" onClick={() => navigate(`/products/${product._id}`)}>Läs mer</button>
                         </section>
                     ))
                 }
