@@ -12,7 +12,7 @@ const LoginPage = () => {
      const {login, user} = useAuth();
      const navigate = useNavigate();
 
-     // Kontrollera användare 
+     // Kontrollera användare och skicka till produktsidan om inloggad
      useEffect(() => {
         if(user) {
             navigate("/products");
@@ -29,7 +29,7 @@ const LoginPage = () => {
             navigate("/products");
             // Fånga fel
         } catch(error) {
-            setError("Inloggnig misslyckades, kontrollera inloggningsuppgifter")
+            setError("Felaktiga inloggningsuppgifter")
 
         }
     };

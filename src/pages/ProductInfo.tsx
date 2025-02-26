@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react" 
+import { useState, useEffect } from "react"
 import { ProductInterface } from "../types/ProductInterface" // Importera interface för produkter 
 import { Link } from "react-router-dom" // Importera link för navigering mellan sidor 
 import { useParams } from "react-router-dom" // Importera useparams för parametrar i url:en 
@@ -33,6 +33,7 @@ const ProductInfo = () => {
         throw new Error("Kunde inte hämta produkten");
       }
 
+      // om ok, hämta produkt 
       const data = await res.json();
       setProduct(data);
 
@@ -43,7 +44,7 @@ const ProductInfo = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
 
@@ -62,14 +63,17 @@ const ProductInfo = () => {
         {/* Felmeddelande */}
         {error && <p className="error-msg">{error}</p>}
 
-        {/* Container med varje produkt */}
+        {/* Container med produkt */}
         {product && (
           <div className="product-container">
             <h3>Tillverkare: {product.factory}</h3>
             <h4>Modell: {product.model}</h4>
             <p>Längd: {product.skilength} cm</p>
-            <p>Antal: {product.quantity} st kvar</p>
             <p>Pris: {product.price} kr</p>
+            <p style={{
+              color: product.quantity === 0 ? "red" : product.quantity < 5 ? "orange" : "green"
+            }}>
+              Antal: {product.quantity} st kvar</p>
 
             <Link to="/">Tillbaka</Link>
           </div>
