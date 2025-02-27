@@ -66,7 +66,7 @@ const HomePage = () => {
             {/* Sökruta och rensa-knapp */}
 
             <ProductSearch products={products} onSearchResults={setFilteredProducts} resetProduct={resetProduct} />
-            <button className="clearBtn" onClick={resetProductSearch}>Rensa sökning</button>
+            <button className="clearBtn" onClick={resetProductSearch}>Rensa sökning <i className="fa-solid fa-xmark"></i></button>
 
             {/* Felmeddelande */}
             {error && <p className="error-msg">{error}</p>}
@@ -79,7 +79,7 @@ const HomePage = () => {
                             <h3>{product.model}</h3>
                             <p>Längd: {product.skilength}</p>
                             <p>Pris: {product.price}</p>
-                            <button className="moreInfo-btn" onClick={() => navigate(`/products/${product._id}`)}>Läs mer</button>
+                            <button className="moreInfo-btn" onClick={() => navigate(`/products/${product._id}`)}><i className="fa-solid fa-angles-right"></i> Läs mer</button>
                         </section>
                     ))
                 }

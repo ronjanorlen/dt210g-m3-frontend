@@ -1,26 +1,29 @@
 import { NavLink } from "react-router-dom" // Importera navlink för navigering
 import { useAuth } from "../context/AuthContext" // Importera context
+import "../components/Header.css";
 
 const Header = () => {
 
-  const {user, logout} = useAuth();
+  const { user, logout } = useAuth();
 
   return (
-   <header>
-    <ul>
-        <li><NavLink to="/">Startsida</NavLink></li>
-        <li>
-          {
-            user && <NavLink to="/products">Lager</NavLink>
-          }
+    <header>
+      <nav>
+        <ul>
+          <li><NavLink to="/">Startsida</NavLink></li>
+          <li>
+            {
+              user && <NavLink to="/products">Lager</NavLink>
+            }
           </li>
-        <li>
-          {
-            !user ? <NavLink to="/login">Logga in</NavLink> : <button onClick={logout}>Logga ut</button>
-          }
+          <li>
+            {
+              !user ? <NavLink to="/login">Logga in</NavLink> : <button onClick={logout}><i className="fa-solid fa-arrow-left"></i> Logga ut</button>
+            }
           </li>
-    </ul>
-   </header>
+        </ul>
+      </nav>
+    </header>
   )
 }
 

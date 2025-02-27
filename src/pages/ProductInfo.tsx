@@ -76,7 +76,7 @@ const ProductInfo = () => {
             }}>
               Antal: {product.quantity} st kvar</p>
 
-            <Link to="/">Tillbaka</Link>
+            <Link to="/"><i className="fa-solid fa-arrow-left"></i> Tillbaka</Link>
           </div>
         )}
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import "./css/LoginPage.css";
 
 
 const LoginPage = () => {
@@ -37,9 +38,9 @@ const LoginPage = () => {
     return (
         <div className="login-container">
             <div className="login-box">
-                <h2>Logga in</h2>
+                <h2><i className="fa-solid fa-user"></i> Logga in</h2>
 
-                <form onSubmit={handleSubmit}>
+                <form className="loginForm" onSubmit={handleSubmit}>
                     {error && (
                         <div className="error-msg">
                             {error}
@@ -66,8 +67,8 @@ const LoginPage = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <button type="submit">
-                        Logga in
+                    <button className="loginBtn" type="submit">
+                        <i className="fa-solid fa-arrow-right"></i> Logga in
                     </button>
                 </form>
             </div>

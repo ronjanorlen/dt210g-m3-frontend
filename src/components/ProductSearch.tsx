@@ -31,7 +31,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({ products, onSearchResults
 
   return (
     <div>
-      <h2>Sök skidor</h2>
+      <h2>Sök skidor <i className="fa-solid fa-magnifying-glass"></i></h2>
       {/* Sökformulär */}
       <form className="search-form">
         <label htmlFor="search"></label>

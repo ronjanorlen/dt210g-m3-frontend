@@ -16,7 +16,7 @@ interface ProductTableProps {
 const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps) => {
 
     const [error, setError] = useState(""); // Felmeddelanden 
-    
+
 
     // Radera produkt 
     const deleteProduct = async (id: string) => {
@@ -49,7 +49,7 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
 
         }
     };
-    
+
 
     // Uppdatera en produkt 
     const handleUpdate = (product: ProductInterface) => {
@@ -64,35 +64,35 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
 
             <div className="table-container">
 
-            <table className="productTable">
-                <thead>
-                    <tr>
-                        <th>Tillverkare</th>
-                        <th>Skidmodell</th>
-                        <th>Skidlängd</th>
-                        <th>Pris</th>
-                        <th>Antal</th>
-                        <th>Åtgärd</th>
-                    </tr>
-                </thead>
-
-                {/* Loopa igenom produkter */}
-                <tbody>
-                    {products.map((product) => (
-                        <tr key={product._id}>
-                            <td>{product.factory}</td>
-                            <td>{product.model}</td>
-                            <td>{product.skilength}</td>
-                            <td>{product.price} kr</td>
-                            <td>{product.quantity} st</td>
-                            <td>
-                                <button className="updateBtn" onClick={() => handleUpdate(product)}>Redigera</button>
-                                <button className="deleteBtn" onClick={() => deleteProduct(product._id!)}>Radera</button>
-                            </td>
+                <table className="productTable">
+                    <thead>
+                        <tr>
+                            <th>Tillverkare</th>
+                            <th>Skidmodell</th>
+                            <th>Skidlängd</th>
+                            <th>Pris</th>
+                            <th>Antal</th>
+                            <th>Åtgärd</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+
+                    {/* Loopa igenom produkter */}
+                    <tbody>
+                        {products.map((product) => (
+                            <tr key={product._id}>
+                                <td>{product.factory}</td>
+                                <td>{product.model}</td>
+                                <td>{product.skilength}</td>
+                                <td>{product.price} kr</td>
+                                <td>{product.quantity} st</td>
+                                <td>
+                                    <button className="updateBtn" onClick={() => handleUpdate(product)}><i className="fa-solid fa-pen"></i> Redigera</button>
+                                    <button className="deleteBtn" onClick={() => deleteProduct(product._id!)}><i className="fa-solid fa-trash"></i> Radera</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
 
         </>

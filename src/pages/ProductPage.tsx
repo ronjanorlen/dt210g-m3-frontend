@@ -72,7 +72,7 @@ const ProductPage = () => {
 
         {/* Sökruta och rensa-knapp */}
         <ProductSearch products={products} onSearchResults={setFilteredProducts} resetProduct={resetProduct} />
-        <button className="clearBtn" onClick={clearProduct}>Rensa sökning</button>
+        <button className="clearBtn" onClick={clearProduct}>Rensa sökning <i className="fa-solid fa-xmark"></i></button>
 
         {/* Tabell med alla produkter */}
         <h2>Skidor i lager</h2>

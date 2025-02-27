@@ -88,6 +88,9 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
                 throw new Error("Något blev fel vid tillägg av ny produkt");
             }
 
+            // Alert-ruta baserat på PUT eller POST anrop
+            alert(method === "POST" ? "Skidorna lades till" : "Skidorna har uppdaterats");
+
             // Uppdatera listan och nollställ produkt samt rensa formuläret 
             updateList();
             clearProduct();
