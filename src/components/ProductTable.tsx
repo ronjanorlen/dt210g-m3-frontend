@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ProductInterface } from "../types/ProductInterface"; // Importera interface for produkter 
+import "../components/ProductTable.css";
 
 
 // Interface med prop för produkttabell 
@@ -61,6 +62,7 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
             {/* Felmeddelande */}
             {error && <p className="error-msg">{error}</p>}
 
+            <div className="table-container">
 
             <table className="productTable">
                 <thead>
@@ -70,6 +72,7 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
                         <th>Skidlängd</th>
                         <th>Pris</th>
                         <th>Antal</th>
+                        <th>Åtgärd</th>
                     </tr>
                 </thead>
 
@@ -90,6 +93,7 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
                     ))}
                 </tbody>
             </table>
+            </div>
 
         </>
     )

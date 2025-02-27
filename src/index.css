@@ -2,4 +2,25 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f8f8f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* Rensa-knapp */
+.clearBtn {
+  padding: 10px 20px;          
+  font-size: 1em;              
+  background-color: #2574cf;    
+  color: white;                 
+  border: none;                 
+  border-radius: 5px;           
+  cursor: pointer;         
+}
+
+.clearBtn:hover {
+  background-color: #175092;           
+}
+
+.clearBtn:active {
+  background-color: #175092;              
 }

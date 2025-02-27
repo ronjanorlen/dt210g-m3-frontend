@@ -65,17 +65,17 @@ const ProductPage = () => {
 
       <div>
         {/* Visa rubrik baserat på om produkt läggs till/uppdateras */}
-        <h2>{selectedProduct ? `Redigering av: ${selectedProduct.model}` : "Lägg till produkt"}</h2>
+        <h2>{selectedProduct ? `Redigerar: ${selectedProduct.model}` : "Lägg till skidor"}</h2>
 
         {/* Formulär */}
         <ProductForm selectedProduct={selectedProduct} updateList={getProducts} clearProduct={clearProduct} />
 
         {/* Sökruta och rensa-knapp */}
         <ProductSearch products={products} onSearchResults={setFilteredProducts} resetProduct={resetProduct} />
-        <button onClick={clearProduct}>Rensa</button>
+        <button className="clearBtn" onClick={clearProduct}>Rensa sökning</button>
 
         {/* Tabell med alla produkter */}
-        <h2>Alla produkter</h2>
+        <h2>Skidor i lager</h2>
         <ProductTable products={filteredProducts} updateProduct={handleUpdate} updateList={getProducts} />
 
       </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { ProductInterface } from "../types/ProductInterface"
 import { useNavigate } from "react-router-dom";
 import ProductSearch from "../components/ProductSearch"; // Importera sök-komponent
+import "./css/HomePage.css"; 
 
 const HomePage = () => {
 
@@ -53,7 +54,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <h1>Startsida - våra produkter</h1>
+            <h1>Våra produkter</h1>
 
             {/* I väntan på api */}
             {loading && (
@@ -65,7 +66,7 @@ const HomePage = () => {
             {/* Sökruta och rensa-knapp */}
 
             <ProductSearch products={products} onSearchResults={setFilteredProducts} resetProduct={resetProduct} />
-            <button onClick={resetProductSearch}>Rensa</button>
+            <button className="clearBtn" onClick={resetProductSearch}>Rensa sökning</button>
 
             {/* Felmeddelande */}
             {error && <p className="error-msg">{error}</p>}
@@ -75,7 +76,7 @@ const HomePage = () => {
                 {
                     filteredProducts.map((product) => (
                         <section className="product" key={product._id}>
-                            <h3>Modell: {product.model}</h3>
+                            <h3>{product.model}</h3>
                             <p>Längd: {product.skilength}</p>
                             <p>Pris: {product.price}</p>
                             <button className="moreInfo-btn" onClick={() => navigate(`/products/${product._id}`)}>Läs mer</button>

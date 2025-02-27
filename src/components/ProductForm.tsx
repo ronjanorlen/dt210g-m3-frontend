@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ProductInterface } from "../types/ProductInterface"; // Importera interface för produkter 
 import { ErrorInterface } from "../types/ErrorInterface"; // Importera interface for fel 
 import * as Yup from "yup"; // Importera yup för validering 
+import "../components/ProductForm.css"; 
 
 // Interface med props för vald produkt 
 interface ProductFormProps {
@@ -174,7 +175,7 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
 
             {/* Ändra text i knapp om produkt är vald för uppdatering */}
             <button type="submit">
-                {selectedProduct ? "Spara" : "Lägg till produkt"}
+                {selectedProduct ? "Spara" : "Lägg till"}
             </button>
 
             {/* Knapp för att avbryta uppdatering */}

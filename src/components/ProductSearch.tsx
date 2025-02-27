@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { ProductInterface } from "../types/ProductInterface"
+import "../components/ProductSearch.css";
 
 
 // Interface med props 
@@ -31,10 +32,11 @@ const ProductSearch: React.FC<ProductSearchProps> = ({ products, onSearchResults
 
     return (
         <div>
+          <h2>Sök skidor</h2>
              {/* Sökformulär */}
              <form className="search-form">
                 <label htmlFor="search"></label>
-                <input type="text" placeholder="Sök skidor" value={search} onChange={(e) => setSearch(e.target.value)} />
+                <input type="text" id="search" placeholder="Ange skidmodell" value={search} onChange={(e) => setSearch(e.target.value)} />
             </form>
         </div>
     )
