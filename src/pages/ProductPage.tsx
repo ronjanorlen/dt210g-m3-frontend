@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { ProductInterface } from "../types/ProductInterface";
 import ProductForm from "../components/ProductForm"; // Importera formulär 
 import ProductTable from "../components/ProductTable"; // Importera tabell
+import ProductSearch from "../components/ProductSearch"; // Importera sökruta 
 
 const ProductPage = () => {
 
   // States 
   const [products, setProducts] = useState<ProductInterface[] | []>([]); // Alla produkter 
   const [selectedProduct, setSelectedProduct] = useState<ProductInterface | null>(null); // För vald produkt, null vid start
+  const [filteredProducts, setFilteredProducts] = useState<ProductInterface[]>([]);
+  const [resetProduct, setResetProduct] = useState(false); 
   const [error, setError] = useState(""); // Ev felmeddelanden 
 
 
@@ -28,6 +31,7 @@ const ProductPage = () => {
         // Om ok, hämta in produkter 
         const data = await res.json();
         setProducts(data);
+        setFilteredProducts(data);
       }
 
       // Fånga fel 
@@ -35,18 +39,21 @@ const ProductPage = () => {
       console.log(error);
       setError("Något gick fel vid hämtning av produkter")
     }
-  }
+  };
+
 
   // Välj produkt att uppdatera 
   const handleUpdate = (product: ProductInterface) => {
     setSelectedProduct(product);
-  }
+  };
 
   // Rensa produkt 
   const clearProduct = () => {
     setSelectedProduct(null);
-  }
-
+    setResetProduct(true);
+    setTimeout(() => setResetProduct(false), 0);
+    getProducts();
+  };
 
   return (
     <div>
@@ -63,9 +70,13 @@ const ProductPage = () => {
         {/* Formulär */}
         <ProductForm selectedProduct={selectedProduct} updateList={getProducts} clearProduct={clearProduct} />
 
+        {/* Sökruta och rensa-knapp */}
+        <ProductSearch products={products} onSearchResults={setFilteredProducts} resetProduct={resetProduct} />
+        <button onClick={clearProduct}>Rensa</button>
+
         {/* Tabell med alla produkter */}
         <h2>Alla produkter</h2>
-        <ProductTable products={products} updateProduct={handleUpdate} updateList={getProducts} />
+        <ProductTable products={filteredProducts} updateProduct={handleUpdate} updateList={getProducts} />
 
       </div>
     </div>

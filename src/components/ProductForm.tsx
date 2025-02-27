@@ -186,4 +186,3 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
 }
 
 export default ProductForm
-

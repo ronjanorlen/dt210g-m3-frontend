@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { ProductInterface } from "../types/ProductInterface"
 import { useNavigate } from "react-router-dom";
+import ProductSearch from "../components/ProductSearch"; // Importera sök-komponent
 
 const HomePage = () => {
 
@@ -8,8 +9,8 @@ const HomePage = () => {
     const [products, setProducts] = useState<ProductInterface[] | []>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-    const [search, setSearch] = useState("");
     const [filteredProducts, setFilteredProducts] = useState<ProductInterface[]>([]);
+    const [resetProduct, setResetProduct] = useState(false); 
 
     // Gå till specifik produkt
     const navigate = useNavigate();
@@ -31,8 +32,8 @@ const HomePage = () => {
                 throw new Error("Något gick fel vid hämtning av produkter");
             } else {
                 const data = await res.json();
-
                 setProducts(data);
+                setFilteredProducts(data);
                 setError(null);
             }
             // Fånga fel 
@@ -44,13 +45,11 @@ const HomePage = () => {
         }
     };
 
-    // Filtrera produkter med useEffect 
-    useEffect(() => {
-        const filtered = products.filter(product =>
-            product.model.toLowerCase().includes(search.toLowerCase()) // Filtrera utifrån skidmodell 
-        );
-        setFilteredProducts(filtered);
-    }, [search, products]);
+    // Återställ produkt-söknig 
+    const resetProductSearch = () => {
+        setResetProduct(true);
+        setTimeout(() => setResetProduct(false), 0);
+    };
 
     return (
         <div>
@@ -63,11 +62,10 @@ const HomePage = () => {
                 </div>
             )}
 
-            {/* Sökformulär */}
-            <form className="search-form">
-                <label htmlFor="search"></label>
-                <input type="text" placeholder="Sök skidmodell" value={search} onChange={(e) => setSearch(e.target.value)} />
-            </form>
+            {/* Sökruta och rensa-knapp */}
+
+            <ProductSearch products={products} onSearchResults={setFilteredProducts} resetProduct={resetProduct} />
+            <button onClick={resetProductSearch}>Rensa</button>
 
             {/* Felmeddelande */}
             {error && <p className="error-msg">{error}</p>}

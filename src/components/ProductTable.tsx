@@ -9,10 +9,13 @@ interface ProductTableProps {
     updateList: () => void; // Uppdatera produkt-lista efter ändring-funktion
 }
 
+
+
 // Definiera komponent, ta emot produkter i lista samt metoder som props 
 const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps) => {
 
     const [error, setError] = useState(""); // Felmeddelanden 
+    
 
     // Radera produkt 
     const deleteProduct = async (id: string) => {
@@ -45,6 +48,7 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
 
         }
     };
+    
 
     // Uppdatera en produkt 
     const handleUpdate = (product: ProductInterface) => {
@@ -56,6 +60,7 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
         <>
             {/* Felmeddelande */}
             {error && <p className="error-msg">{error}</p>}
+
 
             <table className="productTable">
                 <thead>
