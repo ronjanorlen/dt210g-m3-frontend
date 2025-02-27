@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { ProductInterface } from "../types/ProductInterface"
 import { useNavigate } from "react-router-dom";
 import ProductSearch from "../components/ProductSearch"; // Importera sök-komponent
-import "./css/HomePage.css"; 
+import "./css/HomePage.css";
 
 const HomePage = () => {
 
@@ -11,7 +11,7 @@ const HomePage = () => {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [filteredProducts, setFilteredProducts] = useState<ProductInterface[]>([]);
-    const [resetProduct, setResetProduct] = useState(false); 
+    const [resetProduct, setResetProduct] = useState(false);
 
     // Gå till specifik produkt
     const navigate = useNavigate();

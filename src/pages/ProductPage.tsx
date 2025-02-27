@@ -10,7 +10,7 @@ const ProductPage = () => {
   const [products, setProducts] = useState<ProductInterface[] | []>([]); // Alla produkter 
   const [selectedProduct, setSelectedProduct] = useState<ProductInterface | null>(null); // För vald produkt, null vid start
   const [filteredProducts, setFilteredProducts] = useState<ProductInterface[]>([]);
-  const [resetProduct, setResetProduct] = useState(false); 
+  const [resetProduct, setResetProduct] = useState(false);
   const [error, setError] = useState(""); // Ev felmeddelanden 
 
 

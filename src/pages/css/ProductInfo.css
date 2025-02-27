@@ -1,0 +1,33 @@
+.singleProduct {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.singleProduct h3,
+.singleProduct h4 {
+  color: #1c425d;
+}
+
+.singleProduct p {
+  font-size: 1rem;
+  color: #383838;
+  margin: 5px 0;
+}
+
+.singleProduct a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 12px;
+  background-color: #1c425d;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.singleProduct a:hover {
+  background-color: #15344a;
+  transform: scale(1.05);
+}

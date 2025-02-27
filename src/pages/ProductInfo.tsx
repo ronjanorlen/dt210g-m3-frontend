@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { ProductInterface } from "../types/ProductInterface" // Importera interface för produkter 
 import { Link } from "react-router-dom" // Importera link för navigering mellan sidor 
 import { useParams } from "react-router-dom" // Importera useparams för parametrar i url:en 
+import "./css/ProductInfo.css";
 
 const ProductInfo = () => {
 
@@ -65,7 +66,7 @@ const ProductInfo = () => {
 
         {/* Container med produkt */}
         {product && (
-          <div className="product-container">
+          <div className="singleProduct">
             <h3>Tillverkare: {product.factory}</h3>
             <h4>Modell: {product.model}</h4>
             <p>Längd: {product.skilength} cm</p>

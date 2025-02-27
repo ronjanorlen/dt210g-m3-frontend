@@ -8,27 +8,27 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-     // Definiera props som hämtas från useAuth 
-     const {login, user} = useAuth();
-     const navigate = useNavigate();
+    // Definiera props som hämtas från useAuth 
+    const { login, user } = useAuth();
+    const navigate = useNavigate();
 
-     // Kontrollera användare och skicka till produktsidan om inloggad
-     useEffect(() => {
-        if(user) {
+    // Kontrollera användare och skicka till produktsidan om inloggad
+    useEffect(() => {
+        if (user) {
             navigate("/products");
         }
-     }, [user])
+    }, [user])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
 
         try {
-            await login({email, password}); // Skicka med credentials
+            await login({ email, password }); // Skicka med credentials
             // skicka användare vidare till produktsida 
             navigate("/products");
             // Fånga fel
-        } catch(error) {
+        } catch (error) {
             setError("Felaktiga inloggningsuppgifter")
 
         }

@@ -1,23 +1,18 @@
 main {
-    width: 70%;
-    margin: 1em auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  width: 70%;
+  margin: 1em auto;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-h1 {
-    margin-bottom: 1.4em;
-}
-
-
-  /* Media queries */
-  @media (max-width: 768px) {
-    main {
-        width: 90%;
-        border-radius: 0;
-        padding: 10px 5px;
-    }
+/* Media queries */
+@media (max-width: 768px) {
+  main {
+    width: 90%;
+    border-radius: 0;
+    padding: 10px 5px;
   }
+}

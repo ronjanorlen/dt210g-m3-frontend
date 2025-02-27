@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ProductInterface } from "../types/ProductInterface"; // Importera interface för produkter 
 import { ErrorInterface } from "../types/ErrorInterface"; // Importera interface for fel 
 import * as Yup from "yup"; // Importera yup för validering 
-import "../components/ProductForm.css"; 
+import "../components/ProductForm.css";
 
 // Interface med props för vald produkt 
 interface ProductFormProps {
@@ -28,6 +28,7 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
     useEffect(() => {
         if (selectedProduct) {
             setProduct(selectedProduct);
+            setErrors({}); // Rensa ev fel 
         }
     }, [selectedProduct]);
 
@@ -37,16 +38,24 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
         model: Yup.string().required("Ange skidmodell").max(200, "Max 200 tecken"),
         skilength: Yup.number().required("Skidlängd är obligatoriskt").min(100, "Längd måste vara minst 100cm").max(999, "Längd kan vara max 999cm"),
         price: Yup.number().required("Ange priset för skidan").min(1, "Priset måste vara minst 1kr"),
-        quantity: Yup.number().required("Ange antal i lager").min(0, "Minsta antal är 0")
+        quantity: Yup.number().required("Ange antal i lager, minsta antal är 0").min(0, "Minsta antal är 0")
     });
 
     // Hantera uppdatering av staten för produkten 
     const handleUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
         setProduct({
             ...product,
-            [e.target.name]: e.target.value // Uppdatera baserat på fält 
+            // Uppdatera baserat på fält, om siffra ej är inlagd, sätt till null/0 ist för tom sträng
+            [name]: value === "" ? undefined : (e.target.type === "number" ? Number(value) : value)
         });
+        // Rensa felmeddelanden för aktuellt fält 
+        setErrors((prevErrors) => ({
+            ...prevErrors, [name]: undefined
+        }));
+
     };
+
 
     // Submit av formuläret 
     const submitForm = async (e: React.FormEvent) => {
@@ -118,6 +127,7 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
             price: 0,
             quantity: 0
         });
+        setErrors({}); // Rensa ev fel 
     };
 
 
