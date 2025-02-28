@@ -35,7 +35,7 @@ const ProductSearch: React.FC<ProductSearchProps> = ({ products, onSearchResults
       {/* Sökformulär */}
       <form className="search-form">
         <label htmlFor="search"></label>
-        <input type="text" id="search" placeholder="Ange skidmodell" value={search} onChange={(e) => setSearch(e.target.value)} />
+        <input type="text" id="search" placeholder="Ange namn på skida" value={search} onChange={(e) => setSearch(e.target.value)} />
       </form>
     </div>
   )
