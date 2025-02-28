@@ -57,7 +57,7 @@ const ProductInfo = () => {
         {/* I väntan på api */}
         {loading && (
           <div className="waiting">
-            <p><em>Hämtar produkter..</em></p>
+            <p><em>Hämtar skida..</em></p>
           </div>
         )}
 

@@ -59,12 +59,6 @@ const HomePage = () => {
             <p>Vi erbjuder en rad olika skidor från flera olika tillverkare. Vare sig du är ny i skidbacken eller gedigen skidåkare har vi något för dig!<br />
             Du kan också använda sökrutan här nedan för att söka efter en specifik skida. </p>
 
-            {/* I väntan på api */}
-            {loading && (
-                <div className="waiting">
-                    <p><em>Hämtar produkter..</em></p>
-                </div>
-            )}
 
              {/* Banner-bild */}
       <div style={{ width: "100%" }}>
@@ -88,6 +82,13 @@ const HomePage = () => {
 
             {/* Felmeddelande */}
             {error && <p className="error-msg">{error}</p>}
+
+             {/* I väntan på api */}
+             {loading && (
+                <div className="waiting">
+                    <p><em>Skidorna hämtas..</em></p>
+                </div>
+            )}
 
             {/* Container för varje produkt */}
             <div className="product-container">
