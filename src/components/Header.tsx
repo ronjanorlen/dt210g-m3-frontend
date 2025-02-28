@@ -10,7 +10,7 @@ const Header = () => {
     <header>
       <nav>
         <ul>
-          <li><NavLink to="/">Startsida</NavLink></li>
+          <li><NavLink to="/">Skidfabriken</NavLink></li>
           <li>
             {
               user && <NavLink to="/products">Lager</NavLink>
@@ -18,7 +18,7 @@ const Header = () => {
           </li>
           <li>
             {
-              !user ? <NavLink to="/login">Logga in</NavLink> : <button onClick={logout}><i className="fa-solid fa-arrow-left"></i> Logga ut</button>
+              !user ? <NavLink to="/login">Logga in <i className="fa-solid fa-lock"></i></NavLink> : <button onClick={logout}><i className="fa-solid fa-arrow-left"></i> Logga ut</button>
             }
           </li>
         </ul>

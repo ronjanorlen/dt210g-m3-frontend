@@ -16,20 +16,20 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
 
     // States 
     const [errors, setErrors] = useState<ErrorInterface>({}); // Felmeddelanden 
-    const [product, setProduct] = useState<ProductInterface>({ // Objekt med data för produkten 
-        factory: "",
-        model: "",
-        skilength: 0,
-        price: 0,
-        quantity: 0
-    });
+    const [product, setProduct] = useState<ProductInterface>(
+        selectedProduct || { factory: "", model: "", skilength: 0, price: 0, quantity: 0 }
+    );
 
     // useEffect för att hämta data från vald produkt 
     useEffect(() => {
-        if (selectedProduct) {
-            setProduct(selectedProduct);
-            setErrors({}); // Rensa ev fel 
-        }
+        setProduct(selectedProduct ?? { 
+            factory: "", 
+            model: "", 
+            skilength: 0, 
+            price: 0, 
+            quantity: 0 
+        });
+        setErrors({}); // Rensa ev fel
     }, [selectedProduct]);
 
     // Schema för validering med Yup 
@@ -43,17 +43,17 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
 
     // Hantera uppdatering av staten för produkten 
     const handleUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setProduct({
-            ...product,
-            // Uppdatera baserat på fält, om siffra ej är inlagd, sätt till null/0 ist för tom sträng
-            [name]: value === "" ? undefined : (e.target.type === "number" ? Number(value) : value)
-        });
-        // Rensa felmeddelanden för aktuellt fält 
-        setErrors((prevErrors) => ({
-            ...prevErrors, [name]: undefined
+        const { name, value, type } = e.target;
+        
+        setProduct(prevProduct => ({
+            ...prevProduct,
+            [name]: type === "number" ? (value === "" ? 0 : Number(value)) : value.trim()
         }));
-
+    
+        setErrors(prevErrors => ({
+            ...prevErrors, 
+            [name]: undefined
+        }));
     };
 
 
@@ -67,7 +67,7 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
             setErrors({}); // Tomt objekt om ok 
 
             // Sätt url och metod(anrop) baserat på om det är uppdatering av befintlig eller tillägg av produkt 
-            const url = selectedProduct ? `http://localhost:5000/products/${selectedProduct._id}` : "http://localhost:5000/products";
+            const url = selectedProduct ? `https://dt210g-m3-backend.onrender.com/products/${selectedProduct._id}` : "https://dt210g-m3-backend.onrender.com/products";
             const method = selectedProduct ? "PUT" : "POST";
 
             // Ta bort id och v om det är tillägg av produkt för att undvika konflikter med backend 

@@ -3,6 +3,7 @@ import { ProductInterface } from "../types/ProductInterface"
 import { useNavigate } from "react-router-dom";
 import ProductSearch from "../components/ProductSearch"; // Importera sök-komponent
 import "./css/HomePage.css";
+import banner from "../assets/banner.jpg";
 
 const HomePage = () => {
 
@@ -26,7 +27,7 @@ const HomePage = () => {
         try {
             setLoading(true);
 
-            const res = await fetch("http://localhost:5000/products");
+            const res = await fetch("https://dt210g-m3-backend.onrender.com/products");
 
             // Vid fel 
             if (!res.ok) {
@@ -55,6 +56,8 @@ const HomePage = () => {
     return (
         <div>
             <h1>Våra produkter</h1>
+            <p>Vi erbjuder en rad olika skidor från flera olika tillverkare. Vare sig du är ny i skidbacken eller gedigen skidåkare har vi något för dig!<br />
+            Du kan också använda sökrutan här nedan för att söka efter en specifik skida. </p>
 
             {/* I väntan på api */}
             {loading && (
@@ -62,6 +65,21 @@ const HomePage = () => {
                     <p><em>Hämtar produkter..</em></p>
                 </div>
             )}
+
+             {/* Banner-bild */}
+      <div style={{ width: "100%" }}>
+        <img
+          src={banner}
+          alt="Närbild på skidåkare som åker skidor i massa pudersnö"
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "block",
+            maxHeight: "500px",
+            objectFit: "cover"
+          }}
+        />
+      </div>
 
             {/* Sökruta och rensa-knapp */}
 

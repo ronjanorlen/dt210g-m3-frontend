@@ -22,7 +22,7 @@ const ProductPage = () => {
   // Hämta alla produkter 
   const getProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/products");
+      const res = await fetch("https://dt210g-m3-backend.onrender.com/products");
 
       // Om ej ok 
       if (!res.ok) {
@@ -75,7 +75,7 @@ const ProductPage = () => {
         <button className="clearBtn" onClick={clearProduct}>Rensa sökning <i className="fa-solid fa-xmark"></i></button>
 
         {/* Tabell med alla produkter */}
-        <h2>Skidor i lager</h2>
+        <h2>Alla skidor</h2>
         <ProductTable products={filteredProducts} updateProduct={handleUpdate} updateList={getProducts} />
 
       </div>

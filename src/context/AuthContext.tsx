@@ -18,7 +18,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => { // 
     const login = async (credentials: LoginCredentials): Promise<void> => {
 
         try {
-            const res = await fetch("http://localhost:5000/login", {
+            const res = await fetch("https://dt210g-m3-backend.onrender.com/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -52,7 +52,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => { // 
     // Metod för att kontrollera om användaren är inloggad och slippa logga in på nytt vid sidomladdning
     const checkToken = async () => {
         try {
-            const res = await fetch("http://localhost:5000/checkUser", {
+            const res = await fetch("https://dt210g-m3-backend.onrender.com/checkUser", {
                 method: "GET",
                 credentials: "include",
                 headers: {
@@ -81,7 +81,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => { // 
     // Metod för att logga ut 
     const logout = async () => {
         try {
-            const res = await fetch("http://localhost:5000/logout", {
+            const res = await fetch("https://dt210g-m3-backend.onrender.com/logout", {
                 method: "GET",
                 credentials: "include",
                 headers: {

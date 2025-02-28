@@ -26,7 +26,7 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
         if (!confirmDelete) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/products/${id}`, {
+            const res = await fetch(`https://dt210g-m3-backend.onrender.com/products/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"

@@ -27,7 +27,7 @@ const ProductInfo = () => {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(`http://localhost:5000/products/${productId}`); // Hämta produkt med id 
+      const res = await fetch(`https://dt210g-m3-backend.onrender.com/products/${productId}`); // Hämta produkt med id 
 
       // om inte ok 
       if (!res.ok) {
