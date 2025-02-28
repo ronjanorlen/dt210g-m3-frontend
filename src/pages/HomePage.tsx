@@ -96,8 +96,8 @@ const HomePage = () => {
                     filteredProducts.map((product) => (
                         <section className="product" key={product._id}>
                             <h3>{product.model}</h3>
-                            <p>Längd: {product.skilength}</p>
-                            <p>Pris: {product.price}</p>
+                            <p>Längd: {product.skilength} cm</p>
+                            <p>Pris: {product.price} kr</p>
                             <button className="moreInfo-btn" onClick={() => navigate(`/products/${product._id}`)}><i className="fa-solid fa-angles-right"></i> Läs mer</button>
                         </section>
                     ))
