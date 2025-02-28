@@ -47,7 +47,7 @@ const ProductForm = ({ selectedProduct, updateList, clearProduct }: ProductFormP
         
         setProduct(prevProduct => ({
             ...prevProduct,
-            [name]: type === "number" ? (value === "" ? 0 : Number(value)) : value.trim()
+            [name]: type === "number" ? (value === "" ? 0 : Number(value)) : value
         }));
     
         setErrors(prevErrors => ({
