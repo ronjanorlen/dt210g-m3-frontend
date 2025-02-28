@@ -1,50 +1,44 @@
-# React + TypeScript + Vite
+# DT210G Fördjupad Frontend-utveckling Moment 3
+## Skidfabriken - Lagerhantering
+Denna applikation är en SPA (Single Page Application) som är byggd med React och TypeScript. Projektet är ett enkelt lagerhanteringssystem där användare kan hantera ett skidlager. På startsidan listas alla skidor som Skidfabriken har och besökare kan klicka in på varje produkt för att läsa mer. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Funktionalitet
+* Publik del med lista över alla skidor
+* Dynamiska routes för att visa enskild skida
+* Publik sida för att logga in
+* Skyddad sida för inloggade användare för hantering av skidor
+* Sökfunktion för att söka efter skidor
+* Huvudmeny som ändras baserat på om användaren är inloggad eller inte 
+* Responsiv design för små och stora enheter
 
-Currently, two official plugins are available:
+### För inloggad användare:
+* Lägga till nya skidor
+* Redigera befintliga skidor
+* Radera skidor
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Komponenter
+Huvudsakliga komponenter som hanterar innehåll är:
+* ProductFrom: Formulär för att lägga till en ny eller redigera en befintlig produkt
+* ProductTable: Tabell över samtliga produkter
+* ProductSearch: Sökruta för att söka produkt  
 
-## Expanding the ESLint configuration
+Utöver dessa finns även komponenter för header, footer och hantering av den skyddade sidan.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Sidor
+* HomePage: Startsida med text och bild samt listning av samtliga produkter och sökruta (oskyddad)
+* ProductInfo: Sida för enskild produkt (oskyddad)
+* LoginPage: Sida för att logga in (oskyddad)
+* ProductPage: Hantering av samtliga produkter, hämtar in formulär, tabell och sökruta (skyddad)
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Backend
+Applikationens backend-sida är byggt med Hapi.js som ansluter till en MongoDB-databas och använder Mongoose-schema för lagring av data. API:et har full CRUD-funktionalitet med autentisering för skyddade routes. 
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Publicering
+API:et är publicerat till render och webbplatsen har publicerats till Netlify.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Skapad:
+**Av:** Ronja Norlén  
+**Kurs:** Fördjupad frontend-utveckling  
+**Program:** Webbutveckling  
+**Skola:** Mittuniversitetet 
