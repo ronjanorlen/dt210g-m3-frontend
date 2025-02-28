@@ -83,8 +83,8 @@ const ProductTable = ({ products, updateProduct, updateList }: ProductTableProps
                                 <td>{product.factory}</td>
                                 <td>{product.model}</td>
                                 <td>{product.skilength}</td>
-                                <td>{product.price} kr</td>
-                                <td>{product.quantity} st</td>
+                                <td>{product.price}</td>
+                                <td>{product.quantity}</td>
                                 <td>
                                     <button className="updateBtn" onClick={() => handleUpdate(product)}><i className="fa-solid fa-pen"></i> Redigera</button>
                                     <button className="deleteBtn" onClick={() => deleteProduct(product._id!)}><i className="fa-solid fa-trash"></i> Radera</button>
